@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+	<title>TwelloTreak config</title>
+	<style type="text/css">
+		body {
+			font-family: Tahoma, Helvetica,sans-serif;
+			font-size: 11pt;
+			background: url(icons/icon_128.png) no-repeat 0px 10px;
+		}
+		label {
+			display: block;
+			margin-top: 1em;
+			-webkit-user-select: none;
+		}
+		label input {
+			width:   1.5em;
+			margin:  0;
+			padding: 0;
+		}
+		label .help-text {
+			padding:     0;
+			margin:      0;
+			font-size:   smaller;
+			margin-left: 2em;
+			font-style:  italic;
+		}
+		#buttons {
+			position: absolute;
+			left: 16px;
+			top: 138px;
+		}
+		#header { float :left; margin-left: 129px}
+		#message {
+			display: none;
+			background: #FFA;
+			border: 1px solid #CC6;
+			padding: 0.25em;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+<div id="header">
+	<h1>TwelloTreak Options</h1>
+	<div id="intro">
+		<p>These are the options for TwelloTreak</p>
+		<p id="message">Message</p>
+		<label for="option-show-number">
+			<input type="checkbox" id="option-show-number"> Show card numbers
+			<p class="help-text">If checked, then each card's number will show on the card 'front'</p>
+		</label>
+		<label for="option-clickable-numbers">
+			<input type="checkbox" id="option-clickable-numbers"> Clicking card number shows card URL
+			<p class="help-text">If checked, the clicking on this visible card number will show a popup, where you can copy the card's unique URL</p>
+		</label>
+	</div>
+	<div id="buttons">
+		<button id="save">Save</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+	const LOCALSTORE_NAME = 'http://speak.geek.nz/twellotreak/options';
+
+	function saveData() {
+		var data = {};
+		$('input:checkbox').each(function(idx, elt) {
+			data[elt.id] = $(elt).is(':checked');
+		});
+		localStorage[LOCALSTORE_NAME] = JSON.stringify(data);
+		$('#message').text("Saved.");
+		$('#message').show();
+		setTimeout(function() { $('#message').hide('slowly'); }, 1000);
+	}
+
+
+	function loadData(store) {
+		$.each(store, function(idx, val) {
+			var row = addRow();
+			//console.log(val);
+			$('[name=fields]', row).val(val.field);
+			$('[name=values]', row).val(val.value);
+		});
+	}
+
+</script>
+</body>
+</html>

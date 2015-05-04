@@ -1,0 +1,26 @@
+{
+	"name":             "TrelloTweaks",
+	"manifest_version": 2,
+	"version":          "0.0.0",
+	"description":      "Tweaks for Trello",
+	"icons":            {
+		"16": "icons/icon_16.png",
+		"32": "icons/icon_32.png",
+		"128": "icons/icon_128.png"
+	},
+/*	"browser_action": {
+		"default_icon": "icons/icon_16.png",
+		"default_title": "TwelloTreak is running"
+	},
+*/	"content_scripts": [
+		{
+		"matches": ["https://trello.com/*"],
+		"js":      ["jquery-1.11.2.min.js", "tt.user.js"]
+		}
+	],
+	/*, "options_page":		"config.html"*/
+	"permissions": ["tabs", "<all_urls>"],
+	"background": {
+		"scripts": ["background.js"]
+	}
+}
