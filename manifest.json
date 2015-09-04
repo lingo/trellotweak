@@ -2,7 +2,7 @@
 	"name":             "TrelloTweaks",
 	"manifest_version": 2,
 	"version":          "0.0.1",
-	"description":      "Tweaks for Trello",
+	"description":      "Tweaks for Trello.  Specifically, show card numbers and allow clicking the card number to copy the card's URL",
 	"icons":            {
 		"16": "icons/icon_16.png",
 		"32": "icons/icon_32.png",
