@@ -175,6 +175,7 @@ function linkCards(target) {
 	}
 }
 
+
 function bindCardNumbers() {
 	var handler = function(e){
 		var $this = $(e.target);
@@ -186,7 +187,10 @@ function bindCardNumbers() {
 		if (!$this.hasClass('card-short-id')) {
 			return true;
 		}
-		showCardDialog($this.text(), $this.parent().get(0).href);
+		var id  = $this.text();
+		var url = $this.parent().get(0).href;
+		var text = id + ' : ' + url;
+		showCardDialog(id, text);
 		e.stopPropagation();
 		e.preventDefault()
 	};
@@ -224,8 +228,21 @@ function bindLinking() {
 }
 
 
+function waitForPositionList() {
+	//trigger after page update eg ajax event or jquery insert.
+	$(document).on('DOMNodeInserted', '.js-select-position', function (e) {
+		var elt = e.target;
+		if (elt && elt.tagName.toUpperCase() === 'OPTION' && elt.value === 'bottom') {
+			this.options.selectedIndex = 0;
+			$(this).closest('.setting').find('.js-pos-value').text('1');
+		}
+	});
+}
+
+
 showCardNumbers();
 bindCardNumbers();
+// waitForPositionList();
 
 // loadTrello(function(Trello) {
 // 	console.log('gotTrello client', Trello);
